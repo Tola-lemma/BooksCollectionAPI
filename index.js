@@ -18,6 +18,8 @@ app.use(express.json());
 app.get('/',(req,res)=>{
       res.send("Welcome to Book Collection API")
 })
+//API endpoint hanler
+app.use('/',require('./Route/route'))
 
 // Custom 404 Error Handler for invalid routes
 app.use((req, res) => {
