@@ -2,7 +2,7 @@ const db = require('../Database/connection');
 
 exports.bookRecommendation =  async (req, res) => {
   try {
-    const query = 'SELECT * FROM books ORDER BY RANDOM() LIMIT 3';
+    const query = 'SELECT title, author, isbn, published_year, genre, language, publisher, page_count, edition, description FROM books ORDER BY RANDOM() LIMIT 3';
     const result = await db.query(query);
 
     // If no books are found
