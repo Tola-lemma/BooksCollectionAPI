@@ -16,13 +16,13 @@ const validateBook = [
       return true;
     }),
   body('published_year').isInt({ min: 1000, max: currentYear }).withMessage(`Published year must be between 1000 and ${currentYear}`),
-  body('genre').optional().isString().withMessage('Genre must be a valid string'),
-  body('language').optional().isString().withMessage('Language must be a valid string'),
-  body('publisher').optional().isString().withMessage('Publisher must be a valid string'),
+  body('genre').optional().notEmpty().isString().withMessage('Genre must be a valid string'),
+  body('language').optional().notEmpty().isString().withMessage('Language must be a valid string'),
+  body('publisher').optional().notEmpty().isString().withMessage('Publisher must be a valid string'),
   body('page_count').optional().isInt({ min: 1 }).withMessage('Page count must be a positive integer'),
-  body('edition').optional().isString().withMessage('Edition must be a valid string'),
-  body('description').optional().isString().withMessage('Description must be a valid string'),
-  body('price').optional().isDecimal({ decimal_digits: '2' }).withMessage('Price must be a valid decimal with two digits'),
+  body('edition').optional().notEmpty().isString().withMessage('Edition must be a valid string'),
+  body('description').optional().notEmpty().isString().withMessage('Description must be a valid string'),
+  body('price').optional().notEmpty().isDecimal({ decimal_digits: '2' }).withMessage('Price must be a valid decimal with two digits'),
   body('currency')
   .optional()
   .isString()
@@ -31,22 +31,7 @@ const validateBook = [
   body('availability_status').optional().isString().isIn(['Available', 'Sold']).withMessage('Availability status must be "Available" or "Sold"'),
   body('favorite').optional().isBoolean().withMessage('Favorite must be a boolean'),
   body('cover_img')
-  .optional()
-  .custom((value, { req }) => {
-    // If no file is uploaded, pass the validation (optional field)
-    if (!req.file) {
-      return true;
-    }
-    // Validate the MIME type of the uploaded file
-    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    console.log(req.file.mimetype);
-    if (!allowedMimeTypes.includes(req.file.mimetype)) {
-      throw new Error(
-        `Invalid file type. Only JPEG, PNG, and GIF formats are allowed. You uploaded: ${req.file.mimetype}`
-      );
-    }
-    return true;
-  }),
+  .optional().notEmpty(),
 ];
 // Check for validation errors
 const checkValidationResult = (req, res, next) => {
