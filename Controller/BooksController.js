@@ -6,11 +6,25 @@ const {normalizeIsbn} = require('../Validations/isbnNormalization')
 // Set up multer for image upload (in-memory storage for this example)
 const upload = multer({
       storage: multer.memoryStorage(),
-      limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+      limits: { fileSize: 2 * 1024 * 1024 }, // Limit file size to 2MB
+      fileFilter: function (req, file, cb) {
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(new Error('Invalid file type. Only JPEG, JPG, PNG, and GIF are allowed.'));
+        }
+        cb(null, true); 
+      },
     });
-    
+    const fileUploadMiddleware = 
 exports.createBooks = [
       upload.single('cover_img'),
+      // Handle Multer fileFilter errors
+      (err, req, res, next) => {
+        if (err instanceof multer.MulterError || err.message.includes('Invalid file type')) {
+          return res.status(400).json({ message: err.message });
+        }
+        next();
+      },
       validateBook,
       checkValidationResult,
     
