@@ -21,4 +21,9 @@ router.put('/books/:id',updateBookById.updateBookById)
 router.put('/books/add/favorite/:id',addToFavorite.AddtoFavoriteList)
 router.put('/books/unfavorite/:id',Unfavorite.Unfavorite)
 router.get('/books/get/favorite',FavoriteList.FavoriteLists)
+
+//user route
+const signup = require('../Controller/UserController/userController')
+router.post('/auth/signup',signup.CreateUser)
+router.post('/auth/login',signup.UserLogin)
 module.exports = router
