@@ -1,9 +1,19 @@
 const db = require('../Database/connection'); 
 
 exports.bookRecommendation =  async (req, res) => {
+  const userRole = req.user.role;  
   try {
-    const query = 'SELECT title, author, isbn, published_year, genre, language, publisher, page_count, edition, description FROM books ORDER BY RANDOM() LIMIT 3';
-    const result = await db.query(query);
+    let query
+    if (userRole === 'admin') {
+   query = `
+          SELECT title, author, isbn, published_year, genre, language, publisher, page_count, edition, description FROM books 
+          WHERE genre ILIKE ANY(ARRAY['leadership', 'management']) 
+          ORDER BY RANDOM() LIMIT 3;
+      `;
+  } else {
+    query = 'SELECT title, author, isbn, published_year, genre, language, publisher, page_count, edition, description FROM books ORDER BY RANDOM() LIMIT 3';
+  }
+  const result = await db.query(query);
 
     // If no books are found
     if (result.rows.length === 0) {
