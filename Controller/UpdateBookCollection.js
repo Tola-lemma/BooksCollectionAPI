@@ -99,7 +99,7 @@ exports.updateBookById = [
       res.status(200).json({ message: 'Book updated successfully.', updatedBook: newUpdatedBook });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error while updating book information.' });
+      return res.status(500).json({ message: 'Error while updating book information.' });
     }
   }
 ];
