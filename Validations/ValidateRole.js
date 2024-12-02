@@ -2,6 +2,7 @@
 const validRoles = [
       'admin',
       'user',
+      'superadmin',
     ];
     
     const validateRole = (req, res, next) => {
