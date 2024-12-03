@@ -300,6 +300,10 @@ Description: Fetches all books marked as favorite, returning only specific field
 **Access:** `superadmin only`
 ` superadmin token on header `
 ![Sample_get](./screenshot/theader.png)
+
+`when user other than superadmin trying to access this route `
+
+![Sample_get](./screenshot/superadmin.png)
 ## **12. Delete user**
 **Route:** `DELETE /auth/delete/user/:id`
 **Access:** `superadmin only`
