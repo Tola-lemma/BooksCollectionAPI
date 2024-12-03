@@ -35,7 +35,7 @@ exports.CreateUser = async (req, res) => {
           { expiresIn: '1h' },
           (err, token) => {
             if (err) throw err;
-            res.status(201).json({ token, message: 'User Created Successfully and email sent to user.' , user })
+            res.status(201).json({ token, message: 'User Created Successfully.' , user })
           }
         );
       } catch (err) {
