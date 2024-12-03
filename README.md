@@ -93,17 +93,21 @@ Here’s the breakdown of fields for **User Registration** and **User Login**:
    - At least one lowercase letter (`a-z`).
    - At least one digit (`0-9`).
    - At least one special character (`@#$%^&*!`).
+
 **`Password Examples:`**
-✅ StrongP@ssword1
-✅ MyP@ssw0rd!
-❌ password (no uppercase, number, or special character)
-❌ P@ss123 (too short)
+
+✅ StrongP@ssword1 
+✅ MyP@ssw0rd! 
+❌ password (no uppercase, number, or special character)  
+❌ P@ss123 (too short)    
+
 
 # username sample
 `Username Examples:`
-✅ user_123
-✅ Admin-Role
-❌ user!@# (invalid special characters)
+
+✅ user_123 
+✅ Admin-Role 
+❌ user!@# (invalid special characters) 
 ❌ ab (too short)
 
 ---
@@ -190,18 +194,25 @@ NB. The password field displayed during user login is for demonstration purposes
 and On Header part you must pass admin token
 x-auth-token -------   token   {Shown on Second Images Below}
 
-**BODY**
+**BODY** 
+
 ![Post example](./screenshot/post.png)
+
 **HEADER with token**
 **NB. Token Is generated whenever user login so Copy and Paste it here**
+
 ![Post example](./screenshot/token.png)
 ### **2. Get All Books**
 **Route:** `GET /books`
 **Access:** `admin only`
 Description: Fetches a list of all books in the collection.
 ![Sample_get](./screenshot/get.png)
-**x-auth-token**
+**x-auth-token **
+![Sample_get](./screenshot/adminGet.png)
+**x-auth-token on another api test tools**
 ![Sample_get](./screenshot/theader.png)
+**with out x-auth-token**
+![Sample_get](./screenshot/adminGet1.png)
 ## **3. Get Book by ID**
 **Route:** `GET /books/:id`
 **Access:** `user and admin`
@@ -244,6 +255,9 @@ Description: Updates details of an existing book.
 - Error Cases: Returns 404 if the book does not exist.
   ` token on header `
 ![Sample_get](./screenshot/theader.png)
+On another Test Tools
+![Sample_get](./screenshot/adminUpdate.png)
+![Sample_get](./screenshot/adminUpdate1.png)
 ## **8. Add to Favorite**
 **Route:** `PUT /books/add/favorite/:id`
 **Access:** `user only`
