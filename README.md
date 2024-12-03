@@ -96,19 +96,19 @@ Here’s the breakdown of fields for **User Registration** and **User Login**:
 
 **`Password Examples:`**
 
-✅ StrongP@ssword1 
-✅ MyP@ssw0rd! 
-❌ password (no uppercase, number, or special character)  
-❌ P@ss123 (too short)    
+- ✅ StrongP@ssword1 
+- ✅ MyP@ssw0rd! 
+- ❌ password (no uppercase, number, or special character)  
+- ❌ P@ss123 (too short)    
 
 
 # username sample
 `Username Examples:`
 
-✅ user_123 
-✅ Admin-Role 
-❌ user!@# (invalid special characters) 
-❌ ab (too short)
+- ✅ user_123 
+- ✅ Admin-Role 
+- ❌ user!@# (invalid special characters) 
+- ❌ ab (too short)
 
 ---
 
