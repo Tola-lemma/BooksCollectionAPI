@@ -72,3 +72,27 @@ exports.UserLogin = async (req, res) => {
         res.status(500).json('Internal server error.' || error.message);
       }
     };
+
+    exports.getAllUser = async (req, res) => {
+      try {
+        const users = await db.query(`SELECT id, username, email,role FROM users  WHERE role ILIKE ANY(ARRAY['admin', 'user']) `);
+        res.json(users.rows);
+      } catch (err) {
+        res.status(500).json({ message: 'Error retrieving users', error: err.message });
+      }
+    };
+    
+    // Delete User by ID
+    exports.deleteUser = async (req, res) => {
+      const id = req.params.id;
+    
+      try {
+        const result = await db.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
+        if (result.rows.length === 0) {
+          return res.status(404).send({ message: `Cannot delete user with id ${id}, maybe id is wrong!` });
+        }
+        res.json({ success: true, message: `User was deleted successfully!` });
+      } catch (err) {
+        res.status(500).send({ message: `Could not delete user with id ${id}`, error: err.message });
+      }
+    };
