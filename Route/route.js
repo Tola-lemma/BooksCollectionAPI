@@ -14,6 +14,7 @@ const FavoriteList = require('../Controller/FavoriteList')
 const generalAuth = require('../Middleware/AuthMiddleware/GeneralAuth')
 const AdminAuth = require('../Middleware/AuthMiddleware/AdminAuthMiddleware')
 const UserAuth = require('../Middleware/AuthMiddleware/UserAuthMiddleware')
+const superAdminAuth = require('../Middleware/AuthMiddleware/SuperAdmin')
 //API end-points
 //admin only
 router.post('/books',generalAuth,AdminAuth,books.createBooks)
@@ -30,7 +31,10 @@ router.put('/books/unfavorite/:id',generalAuth,UserAuth,Unfavorite.Unfavorite)
 router.get('/books/get/favorite',generalAuth,UserAuth,FavoriteList.FavoriteLists)
 
 //user route
-const signup = require('../Controller/UserController/userController')
-router.post('/auth/signup',signup.CreateUser)
-router.post('/auth/login',signup.UserLogin)
+const user = require('../Controller/UserController/userController')
+router.post('/auth/signup',user.CreateUser)
+router.post('/auth/login',user.UserLogin)
+//superadmin only
+router.get('/auth/users',generalAuth,superAdminAuth,user.getAllUser)
+router.delete('/auth/delete/user/:id',generalAuth,superAdminAuth,user.deleteUser)
 module.exports = router
