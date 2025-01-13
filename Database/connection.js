@@ -10,7 +10,7 @@ const db = new pg.Pool({
       ssl:{
             require:true,
             rejectUnauthorized:true,
-            ca:fs.readFileSync('./../ca.pem')
+            ca:fs.readFileSync('./../ca.pem').toString()
       }
 })
 module.exports = db;
