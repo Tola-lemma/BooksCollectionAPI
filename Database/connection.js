@@ -9,7 +9,7 @@ const db = new pg.Pool({
       database: process.env.DB_NAME,
       ssl:{
             require:true,
-            rejectUnauthorized:false,
+            rejectUnauthorized:true,
             ca:fs.readFileSync('./../ca.pem')
       }
 })
