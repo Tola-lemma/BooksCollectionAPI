@@ -1,5 +1,5 @@
 const pg = require('pg');
-const fs = require('./../ca');
+const fs = require('fs');
 require('dotenv').config();
 const db = new pg.Pool({
       host: process.env.DB_HOST,
@@ -10,7 +10,7 @@ const db = new pg.Pool({
       ssl:{
             require:true,
             rejectUnauthorized:false,
-            ca:fs
+            ca:fs.readFileSync('./../ca.pem')
       }
 })
 module.exports = db;
